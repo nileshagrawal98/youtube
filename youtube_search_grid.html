@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://img.icons8.com/color/48/000000/youtube-play.png" type="image/icon type">
+    <title id="title">Youtube</title>
+    <style>
+        body {
+            background-color: #f9f9f9;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        #videos {
+            display: grid;
+            grid-template-columns: repeat(4, 25%);
+            gap: 6px;
+        }
+
+        #videos>div {
+            display: flex;
+            max-width: 300px;
+            flex-direction: column;
+        }
+
+        #videos > div > div:nth-of-type(1) > iframe {
+            height: 200px;
+        }
+
+        #top_nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgb(202, 202, 202);
+            height: 60px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 4;
+            background-color: white;
+            opacity: 0.99;
+        }
+
+        #search_bar {
+            width: 60%;
+            max-width: 800px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #search_bar>input {
+            max-width: 570px;
+            width: 71%;
+            height: 20px;
+            padding: 10px;
+            border: 1px solid rgb(202, 202, 202);
+            /* box-shadow: -5px -0px -10px gray; */
+        }
+
+        #search_bar>button {
+            width: 50px;
+            height: 42px;
+            border: 1px solid rgb(202, 202, 202);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        #search_bar>button:nth-of-type(2) {
+            width: 41px;
+            height: 41px;
+            border: none;
+            border-radius: 50%;
+            margin: 0px 10px;
+        }
+
+
+
+        #signin {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-right: 10px;
+        }
+
+        #signin>img {
+            cursor: pointer;
+        }
+
+        #signin>div {
+            border: 1px solid #1d6fd7;
+            height: 20px;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            color: #1d6fd7;
+            cursor: pointer;
+        }
+
+        #signin>div>p {
+            margin: 0;
+        }
+
+        #hamburger {
+            padding: 10px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        #hamburger:hover{
+            background-color: #eeececbb;
+            border-radius: 50%;
+        }
+
+        #logo {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Left Nav Expanded */
+
+        .left_nav_expand {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            z-index: 4;
+            background-color: white;
+            height: 100%;
+        }
+
+        .left_nav_expand>ul {
+            list-style: none;
+            margin: 10px 0px;
+            padding-inline-start: 0;
+            width: 200px;
+        }
+
+        .left_nav_expand>ul>li {
+            margin-left: 0;
+            display: flex;
+            padding: 10px 20px;
+            cursor: pointer;
+            align-items: center;
+        }
+
+        .left_nav_expand>ul>li:hover {
+            background-color: #eeececbb;
+        }
+
+        .left_nav_expand>ul>li>p {
+            margin: 0 30px;
+            font-size: 14px;
+        }
+
+        .left_nav_expand>ul>li:nth-of-type(4) {
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .left_nav_expand>ul>li:nth-of-type(5) {
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        /* .left_nav_expand > ul >li:nth-of-type(1){
+            background-color: #e5e5e5;
+        } */
+
+        /* Left Nav Collapsed */
+
+        .left_nav_collapsed {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            z-index: 4;
+            background-color: white;
+            height: 100%;
+        }
+
+        .left_nav_collapsed>ul {
+            list-style: none;
+            margin: 10px 0px;
+            padding-inline-start: 0;
+            width: 72px;
+        }
+
+        .left_nav_collapsed > ul > li {
+            margin-left: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 10px 20px;
+            cursor: pointer;
+            align-items: center;
+            row-gap: 5px;
+        }
+
+        .left_nav_collapsed>ul>li:hover {
+            background-color: #eeececbb;
+        }
+
+        .left_nav_collapsed>ul>li>p {
+            margin-top: 4px;
+            font-size: 10px;
+        }
+
+        #empty_div {
+            height: 70px;
+            background-color: #f9f9f9;
+        }
+
+        #videos {
+            background-color: #f9f9f9;
+            margin-left: 220px;
+            font-size: 14px;
+        }
+
+        #videos>div>p:nth-of-type(1) {
+            font-size: 14px;
+            margin: 0 2px;
+            height: 40px;
+            line-height: 20px;
+            overflow: hidden;
+            text-overflow: clip;
+        }
+
+        #videos>div>p:nth-of-type(2) {
+            color: #606060;
+
+            margin-bottom: 0;
+        }
+
+        #videos>div>div>p {
+            color: #606060;
+            margin-top: 2px;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+
+    <nav id="top_nav">
+        <div id="logo">
+            <div id="hamburger" onclick="toggle_left_nav()">
+                <img src="https://img.icons8.com/ios/50/000000/menu.png" width="20px" />
+            </div>
+            <a href="youtube_search_grid.html"><img
+                    src="https://www.freeiconspng.com/uploads/youtube-logo-png-transparent-image-5.png"
+                    width="100px"></a>
+        </div>
+        <div id="search_bar">
+            <input type="text" id="query" placeholder="Search" />
+            <button onclick="searchVideos()"><img src="https://img.icons8.com/ios-glyphs/30/000000/search--v1.png"
+                    width="20px" /></button>
+            <button><img src="https://img.icons8.com/material-sharp/24/000000/microphone.png" /></button>
+        </div>
+        <div id="signin">
+            <img src="https://img.icons8.com/ios-glyphs/30/000000/circled-menu.png" height="24px" />
+            <img src="https://img.icons8.com/material-rounded/24/000000/menu-2.png" height="24px" />
+            <div>
+                <img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/4a90e2/external-user-interface-kiranshastry-lineal-kiranshastry.png"
+                    width="24px" />
+                <p>SIGN IN</p>
+            </div>
+
+        </div>
+    </nav>
+
+    <nav id="left_nav" class="left_nav_expand">
+        <ul>
+            <li><img src="https://img.icons8.com/material-rounded/24/000000/home.png" />
+                <p>Home</p>
+            </li>
+
+            <li><img src="https://img.icons8.com/material-outlined/24/000000/compass.png" />
+                <p>Explore</p>
+            </li>
+
+            <li><img src="https://img.icons8.com/ios/24/000000/video-playlist.png" />
+                <p>Subscription</p>
+            </li>
+
+            <li><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24"
+                    style=" fill:#000000;">
+                    <path
+                        d="M 3 3 C 1.9069372 3 1 3.9069372 1 5 L 1 15 C 1 16.093063 1.9069372 17 3 17 L 16 17 C 17.093063 17 18 16.093063 18 15 L 18 5 C 18 3.9069372 17.093063 3 16 3 L 3 3 z M 3 5 L 16 5 L 16 15 L 3 15 L 3 5 z M 7 7 L 7 13 L 12 10 L 7 7 z M 20 7 L 20 19 L 5 19 L 5 21 L 20 21 C 21.093063 21 22 20.093063 22 19 L 22 7 L 20 7 z">
+                    </path>
+                </svg>
+                <p>Library</p>
+            </li>
+            <li><img src="https://img.icons8.com/material-outlined/24/000000/time-machine.png" />
+                <p>History</p>
+            </li>
+        </ul>
+    </nav>
+    <div id="empty_div"></div>
+    <div id="videos"></div>
+
+
+    <div id="test"></div>
+
+</body>
+
+<script>
+
+
+
+
+    //url: https://youtube.googleapis.com/youtube/v3/search?q=csk&type=video&key=[YOUR_API_KEY]
+    //key: AIzaSyB1OFyo5K0BcsOxFPDQqe4JRfsw-bkXsTY
+
+
+    async function searchVideos() {
+
+        //q = search term
+        //type = videos
+        //apikey = AIzaSyB1OFyo5K0BcsOxFPDQqe4JRfsw-bkXsTY
+
+        let query = document.getElementById("query").value;
+
+        let res = await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${query}&type=video&key=AIzaSyB1OFyo5K0BcsOxFPDQqe4JRfsw-bkXsTY&maxResults=20&regionCode=IN`);
+
+        let data = await res.json();
+
+        // console.log("data", data);
+
+        appendVideos(data.items);
+
+        //Setting Page Title
+        let page_title = document.getElementById("title");
+        page_title.innerText = `${query} - Youtube`
+
+    }
+
+    async function appendVideos(video_data) {
+        //getting videoId by destructuring here
+
+        let videos = document.getElementById("videos");
+
+        videos.innerHTML = null;
+
+        let ids = [];
+
+        video_data.forEach(({ id: { videoId } }, ) => {
+            ids.push(videoId);
+        });
+
+        ids = ids.toString();
+        console.log(ids);
+
+        let res = await fetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${ids}&key=AIzaSyB1OFyo5K0BcsOxFPDQqe4JRfsw-bkXsTY`);
+
+        let details = await res.json();
+
+        details = details.items;
+
+        //Remove This
+        // let details = sample;
+
+        // console.log(details);
+
+        details.forEach(v => {
+            // console.log(videoId);
+
+            let div = document.createElement("div");
+
+            div.style.marginTop = "20px";
+
+            let video = document.createElement("div");
+
+            video.innerHTML = `<iframe width="100%" src="https://www.youtube.com/embed/${v.id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            
+            let title = document.createElement("p");
+            title.innerText = v.snippet.title;
+            let channel = document.createElement("p");
+            channel.innerText = v.snippet.channelTitle;
+
+            let bottom_div = document.createElement("div");
+
+            let views = document.createElement("p");
+
+            let views_count = v.statistics.viewCount;
+
+            if (views_count >= 1000000) {
+                views.innerText = (Math.round((views_count / 1000000) * 10) / 10).toFixed(1) + "M views";
+            } else {
+                views.innerText = (Math.round((views_count / 1000) * 10) / 10).toFixed(1) + "K views";
+            }
+
+            bottom_div.append(views);
+
+            div.append(video, title, channel, bottom_div);
+
+            videos.append(div);
+        });
+
+    }
+
+    function toggle_left_nav(){
+        let nav = document.getElementById("left_nav");
+
+        let grid = document.getElementById("videos");        
+
+        if(nav.getAttribute("class") == "left_nav_expand"){
+            nav.setAttribute("class", "left_nav_collapsed");
+            grid.style.marginLeft = "80px";
+        }else{
+            nav.setAttribute("class", "left_nav_expand");
+            grid.style.marginLeft = "220px";
+        }
+
+        
+    }
+
+    // async function Test(){
+    //     let res = await fetch(`https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UC_x5XG1OV2P6uZZ5FSM9Ttw&key=AIzaSyB1OFyo5K0BcsOxFPDQqe4JRfsw-bkXsTY`);
+
+    //     let data = await res.json();
+
+    //     console.log(data);
+
+    //     let test = document.getElementById("test");
+
+    //     let image = document.createElement("img");
+
+    //     image.src = data.items[0].snippet.thumbnails.default.url ;
+
+    //     console.log(image.src);
+
+    //     test.append(image);
+    // }
+
+</script>
+
+</html>
