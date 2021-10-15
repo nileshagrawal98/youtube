@@ -28,7 +28,7 @@
             flex-direction: column;
         }
 
-        #videos > div > div:nth-of-type(1) > iframe {
+        #videos>div>div:nth-of-type(1)>iframe {
             height: 200px;
         }
 
@@ -117,7 +117,7 @@
             margin: 0 10px;
         }
 
-        #hamburger:hover{
+        #hamburger:hover {
             background-color: #eeececbb;
             border-radius: 50%;
         }
@@ -192,7 +192,7 @@
             width: 72px;
         }
 
-        .left_nav_collapsed > ul > li {
+        .left_nav_collapsed>ul>li {
             margin-left: 0;
             display: flex;
             flex-direction: column;
@@ -241,8 +241,6 @@
             color: #606060;
             margin-top: 2px;
         }
-
-        
     </style>
 </head>
 
@@ -333,7 +331,7 @@
 
         // console.log("data", data);
 
-        appendVideos(data.items);
+        appendVideos(data.items, "search");
 
         //Setting Page Title
         let page_title = document.getElementById("title");
@@ -341,7 +339,7 @@
 
     }
 
-    async function appendVideos(video_data) {
+    async function appendVideos(video_data, type) {
         //getting videoId by destructuring here
 
         let videos = document.getElementById("videos");
@@ -350,9 +348,16 @@
 
         let ids = [];
 
-        video_data.forEach(({ id: { videoId } }, ) => {
-            ids.push(videoId);
-        });
+        if (type == "search") {
+            video_data.forEach(({ id: { videoId } },) => {
+                ids.push(videoId);
+            });
+        }else if(type == "popular"){
+            video_data.forEach(({ id },) => {
+                ids.push(id);
+            });
+        }
+
 
         ids = ids.toString();
         console.log(ids);
@@ -378,7 +383,7 @@
             let video = document.createElement("div");
 
             video.innerHTML = `<iframe width="100%" src="https://www.youtube.com/embed/${v.id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-            
+
             let title = document.createElement("p");
             title.innerText = v.snippet.title;
             let channel = document.createElement("p");
@@ -405,39 +410,31 @@
 
     }
 
-    function toggle_left_nav(){
+    function toggle_left_nav() {
         let nav = document.getElementById("left_nav");
 
-        let grid = document.getElementById("videos");        
+        let grid = document.getElementById("videos");
 
-        if(nav.getAttribute("class") == "left_nav_expand"){
+        if (nav.getAttribute("class") == "left_nav_expand") {
             nav.setAttribute("class", "left_nav_collapsed");
             grid.style.marginLeft = "80px";
-        }else{
+        } else {
             nav.setAttribute("class", "left_nav_expand");
             grid.style.marginLeft = "220px";
         }
 
-        
+
     }
 
-    // async function Test(){
-    //     let res = await fetch(`https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UC_x5XG1OV2P6uZZ5FSM9Ttw&key=AIzaSyB1OFyo5K0BcsOxFPDQqe4JRfsw-bkXsTY`);
+    async function showPopularVideos() {
+        let res = await fetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=20&regionCode=IN&key=AIzaSyB1OFyo5K0BcsOxFPDQqe4JRfsw-bkXsTY`);
 
-    //     let data = await res.json();
+        let data = await res.json();
 
-    //     console.log(data);
+        appendVideos(data.items, "popular");
+    }
 
-    //     let test = document.getElementById("test");
-
-    //     let image = document.createElement("img");
-
-    //     image.src = data.items[0].snippet.thumbnails.default.url ;
-
-    //     console.log(image.src);
-
-    //     test.append(image);
-    // }
+    showPopularVideos();
 
 </script>
 
