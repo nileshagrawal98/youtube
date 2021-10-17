@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" href="https://img.icons8.com/color/48/000000/youtube-play.png" type="image/icon type">
-    <title id="title">Youtube</title>
+    <title id="title">YouTube</title>
     <style>
         body {
             background-color: #f9f9f9;
@@ -261,13 +261,13 @@
                     width="20px" /></button>
             <button><img src="https://img.icons8.com/material-sharp/24/000000/microphone.png" /></button>
         </div>
-        <div id="signin">
+        <div id="signin" onclick="showLoginPage()">
             <img src="https://img.icons8.com/ios-glyphs/30/000000/circled-menu.png" height="24px" />
             <img src="https://img.icons8.com/material-rounded/24/000000/menu-2.png" height="24px" />
             <div>
                 <img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/4a90e2/external-user-interface-kiranshastry-lineal-kiranshastry.png"
                     width="24px" />
-                <p>SIGN IN</p>
+                <p id="logged_username">SIGN IN</p>
             </div>
 
         </div>
@@ -310,7 +310,20 @@
 
 <script>
 
+    let loggedUser = localStorage.getItem("loggedUser");
 
+    console.log(loggedUser);
+
+    if(loggedUser !== ""){
+        document.getElementById("logged_username").innerText = loggedUser;
+        localStorage.setItem("loggedUser", "");
+        document.getElementById("signin").onclick = "";
+        //Change this after implementing logout and keep logged option.
+    }
+
+    function showLoginPage(){
+        window.location.href = "signin.html"
+    }
 
 
     //url: https://youtube.googleapis.com/youtube/v3/search?q=csk&type=video&key=[YOUR_API_KEY]

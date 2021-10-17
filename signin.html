@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Youtube</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            width: 450px;
+            height: 500px;
+            box-sizing: border-box;
+            padding: 40px 40px 60px;
+            margin: 100px auto 0;
+            border: 1px solid rgba(128, 128, 128, 0.637);
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        #top {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #top>h2 {
+            font-weight: 400;
+            margin: 10px auto;
+        }
+
+        #login_form_username,
+        #login_form_password {
+            width: 100%;
+            box-sizing: border-box;
+            text-align: justify;
+
+        }
+
+        .input-box {
+            width: 100%;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 18px;
+            border: 1px solid rgba(128, 128, 128, 0.637);
+            border-radius: 5px;
+        }
+
+        #login_form_username>div:nth-of-type(1) {
+            margin: 40px auto;
+        }
+
+        #login_form_username>div:nth-of-type(1)>p:nth-of-type(1) {
+            margin-bottom: 2px;
+            color: gray;
+        }
+
+        #login_form_username>div:nth-of-type(2) {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .link {
+            color: rgb(10, 79, 207);
+            font-size: 16px;
+            margin-top: 4px;
+            cursor: pointer;
+        }
+
+        .btn-blue {
+            padding: 10px 25px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            background-color: rgb(10, 79, 207);
+            cursor: pointer;
+        }
+
+        .btn-blue:hover {
+            background-color: rgb(9, 63, 163);
+            box-shadow: 5 0 10px rgba(8, 34, 83, 0.575);
+        }
+
+        .container-bottom {
+            border: none;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 5px;
+            padding: 1px;
+            height: auto;
+        }
+
+        .container-bottom select {
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        .container-bottom>div:nth-of-type(2) {
+            font-size: 14px;
+            color: gray;
+        }
+
+        .container-bottom>div:nth-of-type(2)>span {
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        .check-box {
+            display: flex;
+            column-gap: 5px;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        #login_password_container {
+            display: none;
+        }
+
+        #login_form_password>div:nth-of-type(2) {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-top: 50px;
+        }
+
+        .entered-username {
+            border: 1px solid rgba(128, 128, 128, 0.637);
+            border-radius: 20px;
+            padding: 0px 20px;
+            width: fit-content;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 5px;
+        }
+
+
+        .entered-username>p {
+            margin: 10px 0px;
+        }
+
+        #login_status {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+        #login_status img{
+            margin-right: 5px;
+            vertical-align:text-top;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="login_username_container">
+        <div id="top">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/368px-Google_2015_logo.svg.png"
+                width="75px">
+            <h2>Sign in</h2>
+            <p>Continue to Youtube</p>
+        </div>
+        <form id="login_form_username">
+            <input type="text" placeholder="Username" class="input-box" id="username">
+            <p class="link">Forgot username?</p>
+            <div>
+                <p>Not your computer? Use Guest mode to sign in privately.</p>
+                <p class="link">Learn more</p>
+            </div>
+
+            <div>
+                <p class="link" onclick="showSignUpPage()">Create account</p>
+                <button class="btn-blue" type="submit" onclick="showPasswordContainer(event)">Next</button>
+            </div>
+        </form>
+    </div>
+    <div class="container" id="login_password_container">
+        <div id="top">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/368px-Google_2015_logo.svg.png"
+                width="75px">
+            <h2>Welcome</h2>
+            <div class="entered-username">
+                <img src="https://img.icons8.com/ios-glyphs/30/000000/user--v1.png" width="18px"/>
+                <p id="username_in_pass_container">nileshagra1998</p>
+            </div>
+
+        </div>
+        <form id="login_form_password">
+            <input type="password" placeholder="Enter your password" class="input-box" id="password"
+            >
+            <p id="login_status"><img src="https://img.icons8.com/color/48/000000/high-importance--v1.png" width="14px"/>Wrong username or password!</p>
+            <div class="check-box">
+                <input type="checkbox" id="showpassword">
+                <label for="showpassword">Show password</label>
+            </div>
+
+
+            <div>
+                <p class="link">Forgot password?</p>
+                <button class="btn-blue" type="submit" onclick="Login(event)">Next</button>
+            </div>
+        </form>
+    </div>
+    <div class="container container-bottom">
+        <div>
+            <select name="language" id="language">
+                <option value="eng_uk" selected>
+                    English (United Kingdom)
+                </option>
+                <option value="hindi">
+                    Hindi (India)
+                </option>
+            </select>
+        </div>
+        <div>
+            <span>Help</span>
+            <span>Privacy</span>
+            <span>Terms</span>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    let username = null;
+
+    function showPasswordContainer(e) {
+        e.preventDefault();
+
+        username = document.getElementById("username").value;
+
+        document.getElementById("username_in_pass_container").innerText = username;
+
+        document.getElementById("login_username_container").style.display = "none";
+
+        document.getElementById("login_password_container").style.display = "block";
+
+    }
+
+    async function Login(e) {
+        e.preventDefault();
+
+        let password = document.getElementById("password").value;
+
+        let details = {
+            username,
+            password,
+        }
+
+        console.log(details);
+
+        details = JSON.stringify(details);
+
+        showLoginFailed("hide");
+
+
+        try {
+            let res = await fetch("https://masai-api-mocker.herokuapp.com/auth/login", {
+                method: "POST",
+                body: details,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            let data = await res.json();
+
+            console.log(data);
+
+            if (data.error) {
+                showLoginFailed("show");
+            } else {
+                localStorage.setItem("loggedUser", username);
+                window.location.href = "youtube_search_grid.html";
+            }
+
+        } catch (e) {
+            console.log(e);
+        }
+
+    }
+
+    function showLoginFailed(s){
+        let password = document.getElementById("password");
+        let staus = document.getElementById("login_status");
+
+        if(s == "show"){
+            password.style.border = "2px solid red"
+            login_status.style.display = "block";
+            
+        }else if(s == "hide"){
+            password.style.border = "1px solid rgba(128, 128, 128, 0.637)"
+            login_status.style.display = "none";
+        }
+    }
+
+    function showSignUpPage(){
+        window.location.href = "signup.html";
+    }
+
+
+</script>
+
+</html>

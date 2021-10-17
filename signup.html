@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Create your Google Account</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            box-sizing: border-box;
+            padding: 40px 40px 60px;
+            max-width: 750px;
+            margin: 45px auto 0;
+            border: 1px solid rgba(128, 128, 128, 0.637);
+            border-radius: 5px;
+            display: flex;
+        }
+
+        #left_container {
+            width: 60%;
+            /* background-color: red; */
+        }
+
+        #right_container {
+            width: 40%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #right_container>img {
+            width: 100%;
+        }
+
+        #top {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #top>h2 {
+            font-weight: 400;
+            margin: 10px 0 0;
+        }
+
+        .input-box {
+            width: 100%;
+            padding: 5px 15px;
+            box-sizing: border-box;
+            font-size: 16px;
+            border: 1px solid rgba(128, 128, 128, 0.637);
+            border-radius: 5px;
+        }
+
+        .link {
+            color: rgb(10, 79, 207);
+            font-size: 16px;
+            margin-top: 4px;
+            cursor: pointer;
+        }
+
+        .btn-blue {
+            padding: 10px 25px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            background-color: rgb(10, 79, 207);
+            cursor: pointer;
+        }
+
+        .btn-blue:hover {
+            background-color: rgb(9, 63, 163);
+            box-shadow: 5 0 10px rgba(8, 34, 83, 0.575);
+        }
+
+        .container-bottom {
+            border: none;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 5px;
+            padding: 1px;
+            height: auto;
+        }
+
+        .container-bottom select {
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        .container-bottom>div:nth-of-type(2) {
+            font-size: 14px;
+            color: gray;
+        }
+
+        .container-bottom>div:nth-of-type(2)>span {
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        .check-box {
+            display: flex;
+            column-gap: 5px;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .two-input {
+            display: flex;
+            column-gap: 10px;
+        }
+
+        .input-row {
+            margin: 10px auto 26px;
+        }
+
+        .info-text {
+            font-size: 14px;
+            color: gray;
+            margin-top: 4px;
+        }
+
+        .submission-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .alert-success {
+            display: none;
+            border: 4px solid green;
+            border-radius: 10px;
+            max-width: 350px;
+            margin: 2px auto;
+            text-align: center;
+            color: green;
+            background-color: lightgreen;
+        }
+
+        .alert-failed {
+            display: none;
+            border: 4px solid rgb(250, 98, 98);
+            border-radius: 10px;
+            max-width: 350px;
+            margin: 2px auto;
+            text-align: center;
+            color: rgb(192, 25, 25);
+            background-color: rgb(233, 164, 164);
+        }
+
+
+        @media (max-width: 900px) {
+            #left_container {
+                width: 100%;
+            }
+
+            #right_container {
+                display: none;
+            }
+
+            .container {
+                max-width: 450px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="alert-success" id="signup_success">
+        <p>SignUp Successful</p>
+    </div>
+    <div class="alert-failed" id="signup_failed">
+        <p>SignUp Failed, User Already Exists</p>
+    </div>
+
+    <div class="container">
+        <div id="left_container">
+            <div id="top">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/368px-Google_2015_logo.svg.png"
+                    width="75px">
+                <h2>Create your Google Account</h2>
+                <p>Continue to Youtube</p>
+            </div>
+            <form id="signup_form">
+                <div class="two-input input-row">
+                    <input type="text" id="name" placeholder="Name" class="input-box">
+                    <input type="text" id="username" placeholder="Username" class="input-box">
+                </div>
+                <div class="input-row">
+                    <input type="email" placeholder="Your email address" class="input-box" id="email">
+                    <p class="info-text">You'll need to confirm that this email belongs to you.</p>
+                </div>
+                <p class="link">Create a new Gmail address instead</p>
+                <div class="input-row">
+                    <input type="password" id="password" placeholder="Password" class="input-box" min="8">
+                    <p class="info-text">Use 8 or more characters</p>
+                </div>
+                <div class="input-row">
+                    <input type="tel" id="mobile" placeholder="Mobile Number" class="input-box">
+                </div>
+                <div class="input-row">
+                    <input type="text" id="description" placeholder="Your Description" class="input-box">
+                </div>
+                <div class="input-row submission-row">
+                    <p class="link">Sign in instead</p>
+                    <button class="btn-blue" type="submit" onclick="SignUp(event)">Next</button>
+                </div>
+
+            </form>
+        </div>
+        <div id="right_container">
+            <img src="https://ssl.gstatic.com/accounts/signup/glif/account.svg">
+        </div>
+    </div>
+
+</body>
+
+<script>
+
+    //username: ezioauditore
+    //password: ezio1234
+
+    async function SignUp(e){
+        e.preventDefault();
+
+        document.getElementById("signup_failed").style.display = "none";
+        
+        let form = document.getElementById("signup_form");
+
+        let details = {
+            name: form.name.value,
+            email: form.email.value,
+            password: form.password.value,
+            username: form.username.value,
+            mobile: form.mobile.value,
+            description: form.description.value,
+        }
+
+        console.log(details);
+
+        details = JSON.stringify(details);
+
+        console.log(details);
+
+        try {
+            let res = await fetch("https://masai-api-mocker.herokuapp.com/auth/register", {
+                method: "POST",
+                body: details,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            let data = await res.json();
+            console.log(data);
+            if (data.error) {
+                showSignUpFailed();
+            } else {
+                showSignUpSuccessful();
+            }
+
+        } catch (e) {
+            console.log(e);
+        }
+
+    }
+
+    function showSignUpFailed() {
+        // alert("failed");
+        document.getElementById("signup_failed").style.display = "block";
+        document.getElementById("signup_success").style.display = "none";
+    }
+
+    function showSignUpSuccessful() {
+        // alert("success");
+        document.getElementById("signup_failed").style.display = "none";
+        document.getElementById("signup_success").style.display = "block";
+        setTimeout(() => {
+            window.location.href = "signin.html";
+        }, 1000);
+    }
+
+</script>
+
+</html>
